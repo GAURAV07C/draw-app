@@ -1,18 +1,17 @@
-import express, { Application } from 'express'
+import express, { Application, Request, Response } from "express";
 
 // import jwt from 'jsonwebtokenon'
 
-const app:Application = express();
+import { prismaClient } from "@repo/db/client";
 
-app.post("/signup", (req, res) => {
+import { CreateUserSchema } from "@repo/common/types";
 
-})
+const app: Application = express();
 
+app.post("/signup", (req, res) => {});
 
 app.post("/sigin", (req, res) => {});
 
-
-
 app.post("/room", (req, res) => {});
 
-app.listen(8001)
+app.listen(8001);
