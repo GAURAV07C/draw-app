@@ -1,12 +1,11 @@
 {
-  "name": "@repo/common",
+  "name": "@repo/validator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "exports": {
-    "./types": "./src/types"
+    "./types": "./src/index.ts"
   },
-
   "devDependencies": {
     "@repo/typescript-config": "workspace:*"
   },

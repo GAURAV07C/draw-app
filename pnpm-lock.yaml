@@ -36,15 +36,15 @@ importers:
       '@repo/backend-common':
         specifier: workspace:*
         version: link:../../packages/backend-common
-      '@repo/common':
-        specifier: workspace:*
-        version: link:../../packages/common
       '@repo/db':
         specifier: workspace:*
         version: link:../../packages/db
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@repo/validator':
+        specifier: workspace:*
+        version: link:../../packages/validator
 
   apps/web:
     dependencies:
@@ -110,16 +110,6 @@ importers:
       '@types/node':
         specifier: ^22.13.9
         version: 22.13.9
-    devDependencies:
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-
-  packages/common:
-    dependencies:
-      zod:
-        specifier: ^3.24.2
-        version: 3.24.2
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -222,6 +212,16 @@ importers:
       typescript:
         specifier: 5.8.2
         version: 5.8.2
+
+  packages/validator:
+    dependencies:
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
 
 packages:
 

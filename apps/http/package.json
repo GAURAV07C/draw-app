@@ -11,7 +11,7 @@
     "@repo/typescript-config": "workspace:*",
     "@repo/backend-common": "workspace:*",
     "@repo/db": "workspace:*",
-    "@repo/common": "workspace:*"
+    "@repo/validator": "workspace:*"
   },
   "keywords": [],
   "author": "",
