@@ -5,7 +5,12 @@ import bcrypt from "bcrypt";
 import { prismaClient } from "@repo/db/client";
 import { JWT_SECRET } from "@repo/backend-common/config";
 
-import { CreateUserSchema } from "@repo/validator/types";
+import {
+  createRoomSchema,
+  CreateUserSchema,
+  SignInSchmea,
+} from "@repo/validator/types";
+import { authMiddleware } from "./middleware";
 
 const app: Application = express();
 
@@ -55,7 +60,7 @@ app.post("/signup", async (req, res) => {
 });
 
 app.post("/signin", async (req, res) => {
-  const data = CreateUserSchema.safeParse(req.body);
+  const data = SignInSchmea.safeParse(req.body);
 
   if (!data.success) {
     res.status(400).json({ message: "Invalid Input" });
@@ -112,6 +117,31 @@ app.post("/signin", async (req, res) => {
   }
 });
 
-app.post("/room", (req, res) => {});
+app.post("/room", authMiddleware, async (req: Request, res: Response) => {
+  const data = createRoomSchema.safeParse(req.body);
+
+  try {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(400).json({ message: "User ID is required" });
+      return;
+    }
+
+    const room = await prismaClient.room.create({
+      data: {
+        slug: data.data?.name || "default-slug",
+        adminId: userId,
+      },
+    });
+
+    res.json({
+      message: "Room created successfully",
+      room,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
+});
 
 app.listen(8001);
